@@ -148,7 +148,7 @@ PlayerSettings:
   androidSupportedAspectRatio: 0
   androidMaxAspectRatio: 2.1
   applicationIdentifier:
-    Android: com.alephro.iglasim
+    Android: com.alephro.rpgsim
   buildNumber: {}
   AndroidBundleVersionCode: 1
   AndroidMinSdkVersion: 22
@@ -603,11 +603,12 @@ PlayerSettings:
       daydreamIconForeground: {fileID: 0}
       daydreamIconBackground: {fileID: 0}
   cloudServicesEnabled:
+    Build: 1
     UNet: 1
   facebookSdkVersion: 7.9.4
   apiCompatibilityLevel: 2
   cloudProjectId: 1e6fc4b0-7f7f-43a9-9f55-c7404a8a443e
-  projectName: IglaSim
+  projectName: Rpg-Sim
   organizationId: alephro
   cloudEnabled: 0
   enableNativePlatformBackendsForNewInputSystem: 0
