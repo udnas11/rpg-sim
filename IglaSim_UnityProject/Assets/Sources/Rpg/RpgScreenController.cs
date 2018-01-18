@@ -41,6 +41,7 @@ public class RpgScreenController : MonoBehaviour
         for (int i = 0; i < _enemies.Count; i++)
         {
             _enemiesScreenspace[i] = _arCamera.WorldToViewportPoint(_enemies[i].transform.position);
+            //_enemiesScreenspace[i].z *= UnityRandom.Range(0.5f, 2f);
         }
 
         _heatMaterial.SetVectorArray("_Enemies", _enemiesScreenspace);

@@ -45,6 +45,16 @@
 			fixed4 _Enemies[16];
 			int _EnemiesCount;
 
+			fixed rand()
+			{
+				return frac(sin(_Time.x * 13434.0f) * cos(pow(_Time.y, 2.0f) * 9583.0f));
+			}
+
+			float rand(float2 seed)
+			{
+				return frac(sin(dot(seed.xy * _Time.x, float3(12.9898, 78.233, 45.5432))) * 43758.5453);
+			}
+
 			fixed CalculateHeat(float2 pos)
 			{
 				fixed result = 0.0f;
@@ -58,6 +68,10 @@
 						float depthFactor = smoothstep(50.0f, 500.0f, _Enemies[i].z);
 						float depthEffect = lerp(15.0f, 30.0f, depthFactor);
 
+						//randomizing aura
+						dist = lerp(dist * 0.7f, dist * 1.2f, rand());
+						dist = lerp(dist * 0.4f, dist * 2.5f, rand(pos));
+
 						//inverting
 						dist = 1 - (dist * depthEffect);
 						result = dist > result ? dist : result;
@@ -69,7 +83,8 @@
 			fixed4 frag(v2f i) : SV_Target
 			{
 				fixed distHeat = 0.0f;
-				fixed4 col = pow(tex2D(_MainTex, i.uv), 0.5f);
+				fixed4 col = tex2D(_MainTex, i.uv);
+				//fixed4 col = pow(tex2D(_MainTex, i.uv), 0.5f);
 				if (_EnemiesCount > 0)
 				{
 					fixed heat = CalculateHeat(i.uv);
