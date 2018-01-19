@@ -942,7 +942,7 @@ MonoBehaviour:
   _screenTexture: {fileID: 8400000, guid: 2be7e87b7d7f26647b839be44f00b1e8, type: 2}
   _heatVisionTexture: {fileID: 8400000, guid: e0e135f077d11e14ba31f57e8b86860b, type: 2}
   _heatShader: {fileID: 4800000, guid: f8322a71e4cbaf04083694cc1e2f0a56, type: 3}
-  _heatTexture: {fileID: 2800000, guid: 4d28227556d732447838a5a2c4e46d56, type: 3}
+  _heatTexture: {fileID: 2800000, guid: 3cdeff9a01c32aa48a27c8d74fec85f6, type: 3}
 --- !u!1001 &2059528437
 Prefab:
   m_ObjectHideFlags: 0

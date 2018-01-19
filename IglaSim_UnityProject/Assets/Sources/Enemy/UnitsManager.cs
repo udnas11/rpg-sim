@@ -53,6 +53,12 @@ public class UnitsManager : MonoSingleton<UnitsManager>
 
 
     #region mono events
+    private void OnGUI()
+    {
+        if (GUI.Button(new Rect(0, 100, 100, 100), "Spawn Heli"))
+            SpawnHelicopter();
+    }
+
     private void Awake()
     {
         _spawnerHelicopter = GetComponent<SpawnerHelicopter>();

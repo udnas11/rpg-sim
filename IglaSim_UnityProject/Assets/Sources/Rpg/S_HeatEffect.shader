@@ -66,11 +66,11 @@
 						float dist = distance(enemyScreenspace, pos); //screenspace distance to point
 						// heat signature should be proportional to distance from point, considering distance away from camera
 						float depthFactor = smoothstep(50.0f, 500.0f, _Enemies[i].z);
-						float depthEffect = lerp(15.0f, 30.0f, depthFactor);
+						float depthEffect = lerp(8.0f, 17.0f, depthFactor);
 
 						//randomizing aura
 						dist = lerp(dist * 0.7f, dist * 1.2f, rand());
-						dist = lerp(dist * 0.4f, dist * 2.5f, rand(pos));
+						dist = lerp(dist * 0.1f, dist * 1.0f, rand(pos));
 
 						//inverting
 						dist = 1 - (dist * depthEffect);
@@ -82,17 +82,19 @@
 
 			fixed4 frag(v2f i) : SV_Target
 			{
-				fixed distHeat = 0.0f;
+				fixed heat = 0.0f;
 				fixed4 col = tex2D(_MainTex, i.uv);
 				//fixed4 col = pow(tex2D(_MainTex, i.uv), 0.5f);
 				if (_EnemiesCount > 0)
 				{
-					fixed heat = CalculateHeat(i.uv);
-					col = lerp(col, fixed4(1, 1, 1, 1), heat);
+					heat = CalculateHeat(i.uv);
+					//col = lerp(col, fixed4(1, 1, 1, 1), heat);
+					col = abs(col - heat);
 				}
 				fixed avg = (col.r + col.g + col.b) / 3.0f;
 				fixed4 colHeat = tex2D(_HeatColors, float2(avg, 0.5f));
-				return lerp(colHeat, fixed4(1,1,1,1), distHeat);
+				return colHeat;
+				//return lerp(colHeat, fixed4(1,1,1,1), heat*0.75f);
 			}
 			ENDCG
 		}

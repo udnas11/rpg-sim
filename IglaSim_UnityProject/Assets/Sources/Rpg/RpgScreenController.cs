@@ -45,9 +45,12 @@ public class RpgScreenController : MonoBehaviour
         }
 
         _heatMaterial.SetVectorArray("_Enemies", _enemiesScreenspace);
-        _heatMaterial.SetInt("_EnemiesCount", _enemies.Count);        
+        _heatMaterial.SetInt("_EnemiesCount", _enemies.Count);
 
-        Graphics.Blit(_screenTexture, _heatVisionTexture, _heatMaterial);
+        if (_userShad)
+            Graphics.Blit(_screenTexture, _heatVisionTexture, _heatMaterial);
+        else
+            Graphics.Blit(_screenTexture, _heatVisionTexture);
     }
     #endregion
 
@@ -71,6 +74,13 @@ public class RpgScreenController : MonoBehaviour
     private void OnDestroy()
     {
         FPSCameraController.Instance.OnPreRenderCallback -= ApplyHeatEffect;
+    }
+
+    private bool _userShad = true;
+    private void OnGUI()
+    {
+        if (GUILayout.Button("TOGGLE\nSHADER"))
+            _userShad = !_userShad;
     }
     #endregion
 }
