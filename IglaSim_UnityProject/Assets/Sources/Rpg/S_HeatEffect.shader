@@ -74,7 +74,7 @@
 
 						//inverting
 						dist = 1 - (dist * depthEffect);
-						result = dist > result ? dist : result;
+						result = max(dist, result);
 					}
 				}
 				return result;
@@ -82,19 +82,15 @@
 
 			fixed4 frag(v2f i) : SV_Target
 			{
-				fixed heat = 0.0f;
 				fixed4 col = tex2D(_MainTex, i.uv);
-				//fixed4 col = pow(tex2D(_MainTex, i.uv), 0.5f);
 				if (_EnemiesCount > 0)
 				{
-					heat = CalculateHeat(i.uv);
-					//col = lerp(col, fixed4(1, 1, 1, 1), heat);
+					fixed heat = CalculateHeat(i.uv);
 					col = abs(col - heat);
 				}
 				fixed avg = (col.r + col.g + col.b) / 3.0f;
 				fixed4 colHeat = tex2D(_HeatColors, float2(avg, 0.5f));
 				return colHeat;
-				//return lerp(colHeat, fixed4(1,1,1,1), heat*0.75f);
 			}
 			ENDCG
 		}

@@ -25,6 +25,8 @@ public class RpgScreenController : MonoBehaviour
     Material _heatMaterial;
     List<UnitBase> _enemies;
     Vector4[] _enemiesScreenspace = new Vector4[16];
+
+    const int kShaderEnemycount = 16;
     #endregion
 
 
@@ -38,14 +40,14 @@ public class RpgScreenController : MonoBehaviour
         if (!enabled)
             return;
         
-        for (int i = 0; i < _enemies.Count; i++)
+        for (int i = 0; i < Mathf.Min(_enemies.Count, kShaderEnemycount); i++)
         {
             _enemiesScreenspace[i] = _arCamera.WorldToViewportPoint(_enemies[i].transform.position);
             //_enemiesScreenspace[i].z *= UnityRandom.Range(0.5f, 2f);
         }
 
         _heatMaterial.SetVectorArray("_Enemies", _enemiesScreenspace);
-        _heatMaterial.SetInt("_EnemiesCount", _enemies.Count);
+        _heatMaterial.SetInt("_EnemiesCount", Mathf.Min(_enemies.Count, kShaderEnemycount));
 
         if (_userShad)
             Graphics.Blit(_screenTexture, _heatVisionTexture, _heatMaterial);
